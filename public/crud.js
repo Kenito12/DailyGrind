@@ -29,32 +29,86 @@ const deleteItem = async (id) => {
     }
 };
 
-// Template of the Cardlist
-const template = (data) => DOMPurify.sanitize(`
-        <div class="tab">
-            <h2>${data.BeansName}</h2>
-            <h3>${data.GrinderName}</h3>
-            <h3>${data.GrindSize.$numberDecimal}</h3>
-            <h3>${data.BrewtimeSec}</h3>
-            <h3>${data.YieldVolume.$numberDecimal}</h3>
-            <h3>${data.Dose.$numberDecimal}</h3>
-            <h3>${data.Taste}</h3>
-            <h3>${data.RoastLevel}</h3>
-            <h3>${data.Date}</h3>
-            <h3>${data.Username}</h3>
-        </div>
-        <button class="delete detailclass baloo-da-2-bold" type="button">Delete</button>
-        <br>
-`);
 
 // Render Card
 const renderItem = (data) => {
+
+    // Format date
+    const brewDate = new Date(data.Date);
+    const formattedDate = brewDate.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+    });
+    
+    // Calculate ratio
+    const ratio = (data.YieldVolume.$numberDecimal / data.Dose.$numberDecimal).toFixed(1);
+
+    // Generate stars HTML
+    let starsHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= data.Taste) {
+            starsHTML += '<span class="star">★</span>';
+        } else {
+            starsHTML += '<span class="star empty-star">★</span>';
+        }
+    }
+
+    // Template of the Cardlist
+const template = (data) => DOMPurify.sanitize(`
+    <div class="card-header">
+        <h2 class="card-title">${data.BeansName}</h2>
+        <p class="card-subtitle">${data.RoastLevel} Roast</p>
+        <div class="card-date">${formattedDate}</div>
+    </div>
+    <div class="card-body">
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Grinder</div>
+                <div class="info-value">${data.GrinderName}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Grind Size</div>
+                <div class="info-value">${data.GrindSize.$numberDecimal}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Dose</div>
+                <div class="info-value">${data.Dose.$numberDecimal}g</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Yield</div>
+                <div class="info-value">${data.YieldVolume.$numberDecimal}ml</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Brew Time</div>
+                <div class="info-value">${data.BrewtimeSec}s</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Ratio</div>
+                <div class="info-value">1:${ratio}</div>
+            </div>
+            <div class="info-item taste-rating">
+                <div class="info-label">Taste Rating</div>
+                <div class="stars">
+                    ${starsHTML}
+                </div>
+                <button class="delete-btn" data-id="${data.id}">
+                    <svg class="delete-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/>
+                    </svg>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+`);
+
 
         const div = document.createElement('div');
         div.classList.add('card');
         div.setAttribute('data-id', data._id);
         div.innerHTML = template(data);
-        div.querySelector('.delete').onclick = () =>{
+        div.querySelector('.delete-btn').onclick = () =>{
             deleteItem(data._id)
             gsap.to(div,{opacity:0, x:200, duration:0.5})
             setTimeout(() => {
@@ -62,13 +116,6 @@ const renderItem = (data) => {
             },500)
         };
         listContainer.prepend(div);
-        div.onmouseover = () =>{
-            gsap.to(div, {x:20})
-        }
-        div.onmouseout = () =>{
-            gsap.to(div, {x:0})
-        }
-
 };
 
 

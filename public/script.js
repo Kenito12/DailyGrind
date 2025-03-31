@@ -3,12 +3,15 @@ import {saveItem, deleteItem, renderItem } from './crud.js';
 
 
 let currentRecipe //for storing object value as JSON after parse
+const listContainer = document.getElementById('listContainer');
+const listHeader = document.getElementById('listHeader');
 
 // function to fetch items and render them
 const getItems = async () => {
     try { 
         const response = await fetch('/api/items');
-        const items = await response.json(); 
+        const items = await response.json();
+        listContainer.innerHTML = ""; // Clear the list container before rendering new items
         items.forEach(renderItem);
         console.log(items);
         console.log("GetItems runs!")
@@ -95,6 +98,7 @@ const HamburgerMenuIcon = document.getElementById('menuIcon');
 const formMenu = document.getElementById('formMenu');
 const DVMenu = document.getElementById('DVMenu');
 const menuList = document.getElementById('menu');
+const ListMenu = document.getElementById('ListMenu');
 
 // ScreenList
 const dashboard = document.getElementById('dashboard');
@@ -123,6 +127,11 @@ formMenu.onclick = () => {
     console.log("Form Menu clicked")
 
     // Hide the dashboard and show the form
+    gsap.fromTo(listContainer, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
+        onComplete: () => {
+            listContainer.style.display = "none";
+            listHeader.style.display = "none";
+    }})
     gsap.fromTo(dashboard, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
         onComplete: () => {
             dashboard.style.display = "none";
@@ -141,6 +150,11 @@ DVMenu.onclick = () => {
     console.log("DV Menu clicked")
 
         // Hide the form and show the dashboard
+        gsap.fromTo(listContainer, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
+            onComplete: () => {
+                listContainer.style.display = "none";
+                listHeader.style.display = "none";
+        }})
         gsap.fromTo(dashboard, {duration: 0.5, opacity: 0, y: -100},{duration: 0.5, opacity: 1, y: 0,
             onComplete: () => {
                 if (menuList.style.display === "block") {
@@ -155,3 +169,26 @@ DVMenu.onclick = () => {
                 formContainer.style.display = "none";
         }})
 }
+
+ListMenu.onclick = () => {
+    getItems(); // Call the function to fetch and render items on page load
+    gsap.fromTo(dashboard, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
+        onComplete: () => {
+            dashboard.style.display = "none";
+    }})
+    gsap.fromTo(listContainer, {duration: 0.5, opacity: 0, y: -100},{duration: 0.5, opacity: 1, y: 0,
+        onComplete: () => {
+            if (menuList.style.display === "block") {
+                gsap.fromTo('.menuList', {duration: 0.5, opacity: 1, x: 0,stagger: 0.1},{duration: 0.5,opacity: 0, x: 100,stagger: 0.1,onComplete: () => {
+                    menuList.style.display = "none";
+                  }});
+            }
+            listHeader.style.display = "block";
+            listContainer.style.display = "grid";
+    }})
+    gsap.fromTo(formContainer, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
+        onComplete: () => {
+            formContainer.style.display = "none";
+    }})
+}
+

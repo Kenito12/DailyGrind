@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@636&family=Matemasie&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js" integrity="sha256-ZAdXaZOlqhMD6vn++5Xlz8HAyAZFvTcX22cXJ+a1W5E=" crossorigin="anonymous"></script>
+    <title>☕EspressoCoffeeDialIn☕</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="listContainer"></div>
+    <h1>☕Espresso Recipe☕</h1>
+    <form id="brewingForm">
+        <div class="form-group">
+            <label for="beansName">Beans Name:</label>
+            <input type="text" id="beansName" name="beansName">
+        </div>
+
+        <div class="form-group">
+            <label for="grinderName">Grinder Name:</label>
+            <input type="text" id="grinderName" name="grinderName">
+        </div>
+
+        <div class="form-group">
+            <label for="grindSize">Grind Size:</label>
+            <input type="number" id="grindSize" name="grindSize" step="0.1">
+        </div>
+
+        <div class="form-group">
+            <label for="brewtimeSec">Brewtime (seconds):</label>
+            <input type="number" id="brewtimeSec" name="brewtimeSec" step="0.1">
+        </div>
+
+        <div class="form-group">
+            <label for="yieldVolume">Yield Volume:</label>
+            <input type="number" id="yieldVolume" name="yieldVolume" step="0.1">
+        </div>
+
+        <div class="form-group">
+            <label for="dose">Dose:</label>
+            <input type="number" id="dose" name="dose" step="0.1">
+        </div>
+
+        <div class="form-group">
+            <label>Taste Rating:</label>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="taste" value="5">
+                <label for="star5"></label>
+                <input type="radio" id="star4" name="taste" value="4">
+                <label for="star4"></label>
+                <input type="radio" id="star3" name="taste" value="3">
+                <label for="star3"></label>
+                <input type="radio" id="star2" name="taste" value="2">
+                <label for="star2"></label>
+                <input type="radio" id="star1" name="taste" value="1">
+                <label for="star1"></label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Roast Level:</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="light" name="roastLevel" value="Light">
+                    <label for="light">Light</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="medium" name="roastLevel" value="Medium">
+                    <label for="medium">Medium</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="dark" name="roastLevel" value="Dark">
+                    <label for="dark">Dark</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="finishButton">Finish</button>
+    </form>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="script.js" type="module"></script>
+</html>

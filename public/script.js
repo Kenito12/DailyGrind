@@ -2,6 +2,8 @@
 import {saveItem, deleteItem, renderItem } from './crud.js';
 
 
+let currentRecipe //for storing object value as JSON after parse
+
 // function to fetch items and render them
 const getItems = async () => {
     try { 
@@ -53,26 +55,34 @@ finishButton.addEventListener('click', function() {
         timestamp: new Date().toISOString()
     };
         
-    // Log the collected data (you can modify this to save or send the data)
+    // Log the collected data 
     console.log('Brewing Data:', brewingData);
-        
+    // Format the data for saveing it to the API
+    formatData(brewingData);
     // Optional: Show confirmation to user
     alert('Form submitted successfully!');
+
+    // push the json object to the database
+    saveItem(currentRecipe)
 });
 
 
 // function to format the keyvalue from api
-const formatData = (foodTitle, protein, cals) => {
+const formatData = (data) => {
     let jsonObject = `{
     "_id":"",
-    "foodTitle":"${foodTitle}",
-    "searchQuery":"${searchInput.value}",
-    "protein":"${protein}",
-    "calories":"${cals}",
-    "username":"${userName}"
-  }
+    "BeansName":"${data.beansName}",
+    "GrinderName":"${data.grinderName}",
+    "GrindSize":"${data.grindSize}",
+    "BrewtimeSec":"${data.brewtimeSec}",
+    "YieldVolume":"${data.yieldVolume}",
+    "Dose":"${data.dose}",
+    "Taste":"${data.taste}",
+    "RoastLevel":"${data.roastLevel}",
+    "Date":"${data.timestamp}",
+    "Username":"Ken"
+    }
     ` 
-  
-    currentIngr = JSON.parse(jsonObject)
-    console.log(currentIngr)
+    currentRecipe = JSON.parse(jsonObject)
+    console.log(currentRecipe)
   }

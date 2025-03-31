@@ -11,7 +11,7 @@ const saveItem = async (data) => {
     try {
         const response = await fetch(endpoint, options);
         const updatedItem = await response.json();
-        renderItem(updatedItem); // Re-renderItem with updated data
+        // renderItem(updatedItem);
     } catch (error) {
         console.log(error);
     }

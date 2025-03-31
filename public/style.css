@@ -7,9 +7,8 @@ html, body{
 
 body {
     font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
     padding: 20px;
+    position: relative;
 }
 .form-group {
     margin-bottom: 15px;
@@ -74,3 +73,93 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+#formContainer{
+    margin: 0 auto;
+    max-width: 600px;
+}
+#dashboard{
+    max-width: 90vw;
+    margin: 0 auto;
+    >h1{
+        text-align: center;
+    }
+}
+#HamburgerMenu{
+    position:fixed;
+    z-index: 5;
+    top: 20px;
+    right: 20px;
+    >img{
+        width: 80px;
+        height: auto;
+        float: right;
+    }
+    >img:hover{
+        cursor: pointer;
+    }
+    >div{
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+}
+
+#menu{
+    display: none;
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        height: auto;
+      }
+      
+    li  {
+        display: block;
+        font-size: 20px;
+        color:  #3d352f;
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #EAD6C3;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    li:hover{
+        cursor: pointer;
+        background-color: #675a4f;
+        color: #EAD6C3;
+    }
+
+    li:active{
+        background-color: #675a4f;
+        color: #EAD6C3;
+    }
+}
+
+#dashboard {
+    display: none;
+}
+#desktopDash{
+    display: block;
+}
+#mobileDash{
+    display: none;
+}
+
+
+@media only screen and (max-width: 900px) {
+    #desktopDash{
+        display: none;
+    }
+    #mobileDash{
+        display: block;
+    }
+    #HamburgerMenu{
+        bottom: 20px;
+        top: auto;
+        >img{
+            width: 60px;
+        }
+    }
+  }

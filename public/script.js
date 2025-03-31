@@ -21,6 +21,9 @@ const getItems = async () => {
 const finishButton = document.getElementById('finishButton');
     
 finishButton.addEventListener('click', function() {
+
+    // Prevent default form submission
+    // event.preventDefault();
     // Get all form inputs
     const beansName = document.getElementById('beansName').value.trim();
     const grinderName = document.getElementById('grinderName').value.trim();
@@ -86,3 +89,69 @@ const formatData = (data) => {
     currentRecipe = JSON.parse(jsonObject)
     console.log(currentRecipe)
   }
+
+//HamburgerMenu
+const HamburgerMenuIcon = document.getElementById('menuIcon');
+const formMenu = document.getElementById('formMenu');
+const DVMenu = document.getElementById('DVMenu');
+const menuList = document.getElementById('menu');
+
+// ScreenList
+const dashboard = document.getElementById('dashboard');
+const formContainer = document.getElementById('formContainer');
+
+gsap.from(HamburgerMenuIcon, {duration: 0.5, opacity: 0, x: 100});
+HamburgerMenuIcon.onclick = () => {
+    if (menuList.style.display === "block") {
+        gsap.fromTo('.menuList', {duration: 0.5, opacity: 1, x: 0,stagger: 0.1},{duration: 0.5,opacity: 0, x: 100,stagger: 0.1,onComplete: () => {
+            menuList.style.display = "none";
+          }});
+    } else {
+        menuList.style.display = "block";
+        gsap.fromTo('.menuList', {duration: 0.5, opacity: 0, x: 100,stagger: 0.1},{duration: 0.5,opacity: 1, x: 0,stagger: 0.1});
+    }
+}
+
+HamburgerMenuIcon.onmouseover = () => {
+    gsap.fromTo(HamburgerMenuIcon, {duration: 0.5, scale: 1},{duration: 0.5, scale: 0.8});
+}
+HamburgerMenuIcon.onmouseout = () => {
+    gsap.fromTo(HamburgerMenuIcon, {duration: 0.5, scale: 0.8},{duration: 0.5, scale: 1});
+}
+
+formMenu.onclick = () => {
+    console.log("Form Menu clicked")
+
+    // Hide the dashboard and show the form
+    gsap.fromTo(dashboard, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
+        onComplete: () => {
+            dashboard.style.display = "none";
+    }})
+    gsap.fromTo(formContainer, {duration: 0.5, opacity: 0, y: 100},{duration: 0.5, opacity: 1, y: 0,
+        onComplete: () => {
+            if (menuList.style.display === "block") {
+                gsap.fromTo('.menuList', {duration: 0.5, opacity: 1, x: 0,stagger: 0.1},{duration: 0.5,opacity: 0, x: 100,stagger: 0.1,onComplete: () => {
+                    menuList.style.display = "none";
+                  }});
+            }
+            formContainer.style.display = "block";
+    }})
+}
+DVMenu.onclick = () => {
+    console.log("DV Menu clicked")
+
+        // Hide the form and show the dashboard
+        gsap.fromTo(dashboard, {duration: 0.5, opacity: 0, y: -100},{duration: 0.5, opacity: 1, y: 0,
+            onComplete: () => {
+                if (menuList.style.display === "block") {
+                    gsap.fromTo('.menuList', {duration: 0.5, opacity: 1, x: 0,stagger: 0.1},{duration: 0.5,opacity: 0, x: 100,stagger: 0.1,onComplete: () => {
+                        menuList.style.display = "none";
+                      }});
+                }
+                dashboard.style.display = "block";
+        }})
+        gsap.fromTo(formContainer, {duration: 0.5, opacity: 1, y: 0},{duration: 0.5, opacity: 0, y: -100,
+            onComplete: () => {
+                formContainer.style.display = "none";
+        }})
+}

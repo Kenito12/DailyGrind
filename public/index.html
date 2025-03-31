@@ -11,75 +11,103 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Hamburger Menu -->
+     <div id="HamburgerMenu">
+         <div class="menu" id="menu">
+             <ul>
+                 <li class="menuList" id="formMenu">Form</li>
+                 <!-- <li><a href="#" data-view="listView">List</a></li> -->
+                 <li class="menuList" id="DVMenu">Data Visualized</li>
+                </ul>
+        </div>
+        <img id="menuIcon" src="Assets/HamburgerMenu.svg" alt="hamburgerMenu">
+    </div>
+    <!-- Log List -->
     <div id="listContainer"></div>
-    <h1>☕Espresso Recipe☕</h1>
-    <form id="brewingForm">
-        <div class="form-group">
-            <label for="beansName">Beans Name:</label>
-            <input type="text" id="beansName" name="beansName">
-        </div>
+    <!-- Dashboard -->
+     <div id="dashboard">
+        <h1>☕Espresso Dashboard☕</h1>
 
-        <div class="form-group">
-            <label for="grinderName">Grinder Name:</label>
-            <input type="text" id="grinderName" name="grinderName">
-        </div>
+        <iframe id="desktopDash" style="background: none;border: none;border-radius: 2px; margin: 0 auto; width: 90vw;height: 100vh;"  
+        src="https://charts.mongodb.com/charts-systemdesignfall2024-hiqykny/embed/dashboards?id=1646f132-0227-4943-88b4-96d7ca2697f2&theme=light&autoRefresh=true&maxDataAge=60&showTitleAndDesc=false&scalingWidth=scale&scalingHeight=scale">
+        </iframe>
 
-        <div class="form-group">
-            <label for="grindSize">Grind Size:</label>
-            <input type="number" id="grindSize" name="grindSize" step="0.1">
-        </div>
-
-        <div class="form-group">
-            <label for="brewtimeSec">Brewtime (seconds):</label>
-            <input type="number" id="brewtimeSec" name="brewtimeSec" step="0.1">
-        </div>
-
-        <div class="form-group">
-            <label for="yieldVolume">Yield Volume:</label>
-            <input type="number" id="yieldVolume" name="yieldVolume" step="0.1">
-        </div>
-
-        <div class="form-group">
-            <label for="dose">Dose:</label>
-            <input type="number" id="dose" name="dose" step="0.1">
-        </div>
-
-        <div class="form-group">
-            <label>Taste Rating:</label>
-            <div class="star-rating">
-                <input type="radio" id="star5" name="taste" value="5">
-                <label for="star5"></label>
-                <input type="radio" id="star4" name="taste" value="4">
-                <label for="star4"></label>
-                <input type="radio" id="star3" name="taste" value="3">
-                <label for="star3"></label>
-                <input type="radio" id="star2" name="taste" value="2">
-                <label for="star2"></label>
-                <input type="radio" id="star1" name="taste" value="1">
-                <label for="star1"></label>
+        <iframe id="mobileDash" style="background: none;border: none;border-radius: 2px; margin: 0 auto; width: 90vw;height:1500px;"  
+        src="https://charts.mongodb.com/charts-systemdesignfall2024-hiqykny/embed/dashboards?id=c67574b2-1b87-410e-a4fa-1da99b60d084&theme=light&autoRefresh=true&maxDataAge=60&showTitleAndDesc=false&scalingWidth=scale&scalingHeight=scale">
+        </iframe>
+     </div>
+    <!-- Form -->
+    <div id="formContainer">
+        <h1>☕Espresso Recipe☕</h1>
+        <form id="brewingForm">
+            <div class="form-group">
+                <label for="beansName">Beans Name:</label>
+                <input type="text" id="beansName" name="beansName">
             </div>
-        </div>
 
-        <div class="form-group">
-            <label>Roast Level:</label>
-            <div class="radio-group">
-                <div class="radio-option">
-                    <input type="radio" id="light" name="roastLevel" value="Light">
-                    <label for="light">Light</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="medium" name="roastLevel" value="Medium">
-                    <label for="medium">Medium</label>
-                </div>
-                <div class="radio-option">
-                    <input type="radio" id="dark" name="roastLevel" value="Dark">
-                    <label for="dark">Dark</label>
+            <div class="form-group">
+                <label for="grinderName">Grinder Name:</label>
+                <input type="text" id="grinderName" name="grinderName">
+            </div>
+
+            <div class="form-group">
+                <label for="grindSize">Grind Size:</label>
+                <input type="number" id="grindSize" name="grindSize" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="brewtimeSec">Brewtime (seconds):</label>
+                <input type="number" id="brewtimeSec" name="brewtimeSec" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="yieldVolume">Yield Volume:</label>
+                <input type="number" id="yieldVolume" name="yieldVolume" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="dose">Dose:</label>
+                <input type="number" id="dose" name="dose" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label>Taste Rating:</label>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="taste" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="taste" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="taste" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="taste" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="taste" value="1">
+                    <label for="star1"></label>
                 </div>
             </div>
-        </div>
 
-        <button type="button" id="finishButton">Finish</button>
-    </form>
+            <div class="form-group">
+                <label>Roast Level:</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="light" name="roastLevel" value="Light">
+                        <label for="light">Light</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="medium" name="roastLevel" value="Medium">
+                        <label for="medium">Medium</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="dark" name="roastLevel" value="Dark">
+                        <label for="dark">Dark</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="finishButton">Finish</button>
+        </form>
+    </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
